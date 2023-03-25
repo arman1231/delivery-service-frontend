@@ -11,6 +11,7 @@ const Register = () => {
                 <input type='text' placeholder='Name' className={styles.input} />
                 <input type='email' placeholder='Email' className={styles.input} />
                 <input type='password' placeholder='Password' className={styles.input} />
+                <input type='submit' value='Submit' className={styles.submitButton} />
             </form>
             <p className={styles.underForm}>
                 Already have an account? {" "}

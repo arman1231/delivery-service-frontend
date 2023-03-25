@@ -11,6 +11,8 @@
 .form {
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
     gap: 15px;
 }
 
@@ -28,4 +30,15 @@
 
 input:focus {
     outline: #E6501D 2px solid;
+}
+
+.submitButton {
+    background-color: #E6501D;
+    color: #fff;
+    border: none;
+    padding: 20px;
+    width: 300px;
+    text-align: center;
+    border-radius: 40px;
+    cursor: pointer;
 }
