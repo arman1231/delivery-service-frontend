@@ -1,0 +1,31 @@
+.link {
+    color: #E6501D;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.heading {
+    text-align: center;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.underForm {
+    text-align: center;
+}
+.input {
+    background-color: #302683;
+    width: 480px;
+    padding: 20px 20px;
+    border: none;
+    border-radius: 40px;
+    color: #D9D9D9;
+}
+
+input:focus {
+    outline: #E6501D 2px solid;
+}
