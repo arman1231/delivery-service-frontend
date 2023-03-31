@@ -1,20 +1,30 @@
+import { AnyAction, ThunkDispatch } from '@reduxjs/toolkit';
+import axios from 'axios';
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom'
+import { fetchRegister } from '../../services/auth/slice';
 import AuthService from '../../utils/api/authApi';
 import styles from './Register.module.css'
 
 const Register = () => {
+    const dispatch: ThunkDispatch<any, any, AnyAction> = useDispatch();
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
-    const handleSubmit = (e: React.FormEvent): React.FormEventHandler<HTMLFormElement> | void => {
+    const handleSubmit = (e: React.FormEvent): void => {
         e.preventDefault();
-        console.log('hi');
-        // register(name, email, password)
-        testRequest()
+        // dispatch(fetchRegister({name, email, password}));
+        // testRequest()
+        test2()
     }
 
+
+    const test2 = () => {
+        return axios.post('http://localhost:8081/auth/sign-up', { email, name, password }).then(res => console.log(res)
+        )
+    }
     const testRequest = () => {
         return fetch(`http://localhost:8081/auth/sign-up`, {
             headers: {
@@ -22,7 +32,7 @@ const Register = () => {
             },
             method: "POST",
             body: JSON.stringify({
-                "email": "arm2@ya.ru",
+                "email": "arm333@ya.ru",
                 "name": "Arm",
                 "password": "1234567890"
             }),
@@ -36,16 +46,7 @@ const Register = () => {
         }).then(data => console.log(data)
         )
     }
-    const register = async (name: string, email: string, password: string) => {
-        try {
-            const res = await AuthService.register(name, email, password);
-            localStorage.setItem('token', res.data.token);
-            console.log(res);
 
-        } catch (error) {
-            console.log(error);
-        }
-    }
 
     return (
         <section className={styles.register}>
@@ -65,8 +66,7 @@ const Register = () => {
                 </Link>
             </p>
         </section>
-
     )
 }
 
-export default Register
+export default Register;
