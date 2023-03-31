@@ -16,7 +16,7 @@ interface IInitialState {
 export const fetchRegister = createAsyncThunk('auth/fetchRegister', async ({ name, email, password }: RegisterPayload) => {
     try {
       const { data } = await AuthService.register(name, email, password);
-      console.log(data);
+      localStorage.setItem('token', data.token)
       return data;
     } catch (error) {
       console.log(error);
@@ -49,5 +49,8 @@ const authSlice = createSlice({
             });
     }
 });
+// export const isAuth = (state: { auth: { user: any; }; }) => state.auth.user;
+// console.log(isAuth);
+
 
 export default authSlice.reducer;
