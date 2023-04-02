@@ -9,7 +9,7 @@ const Homepage = () => {
       <p>
         Here you can manage your deliveries fast and secure. "Delivery Service" is another level product. We can provide you with many usefull services and features that could be very helpful doing your everyday routine.
       </p>
-      <p>Please be patient and proceed to <Link className={styles.textLink} to='sign-up'>register</Link> or <Link className={styles.textLink} to='sing-in'>sign-in</Link> using an existing account</p>
+      <p>Please be patient and proceed to <Link className={styles.textLink} to='sign-up'>register</Link> or <Link className={styles.textLink} to='sign-in'>sign-in</Link> using an existing account</p>
     </section>
   )
 }
