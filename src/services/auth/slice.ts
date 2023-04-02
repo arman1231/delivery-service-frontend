@@ -24,6 +24,17 @@ export const fetchRegister = createAsyncThunk('auth/fetchRegister', async ({ nam
     }
   });
 
+  export const fetchLogin = createAsyncThunk('auth/fetchLogin', async ({ email, password }: Omit<RegisterPayload, "name">) => {
+    try {
+      const { data } = await AuthService.login(email, password);
+      localStorage.setItem('token', data.token)
+      return data;
+    } catch (error) {
+      console.log(error);
+      throw error;
+    }
+  });
+
 const initialState: IInitialState = {
     user: null,
     status: 'idle',
@@ -33,7 +44,13 @@ const initialState: IInitialState = {
 const authSlice = createSlice({
     name: 'auth',
     initialState,
-    reducers: {},
+    reducers: {
+        logout: (state) => {
+            state.user = null
+            state.status = 'idle'
+            state.error = null
+        }
+    },
     extraReducers: (builder) => {
         builder
             .addCase(fetchRegister.pending, (state) => {
@@ -46,7 +63,18 @@ const authSlice = createSlice({
             .addCase(fetchRegister.rejected, (state, action) => {
                 state.status = 'failed';
                 state.error = action.error.message;
-            });
+            })
+            .addCase(fetchLogin.pending, (state) => {
+                state.status = 'loading';
+            })
+            .addCase(fetchLogin.fulfilled, (state, action) => {
+                state.status = 'succeeded';
+                state.user = action.payload;
+            })
+            .addCase(fetchLogin.rejected, (state, action) => {
+                state.status = 'failed';
+                state.error = action.error.message;
+            })
     }
 });
 // export const isAuth = (state: { auth: { user: any; }; }) => state.auth.user;
@@ -54,3 +82,5 @@ const authSlice = createSlice({
 
 
 export default authSlice.reducer;
+
+export const { logout } = authSlice.actions;

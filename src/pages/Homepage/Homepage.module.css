@@ -1,0 +1,9 @@
+.homepage {
+    padding: 0px 80px;
+    color: #333;
+}
+.textLink {
+    color: #333;
+    text-decoration: none;
+    border-bottom: 1px solid #E84E1B;
+}

@@ -1,5 +1,4 @@
 import { AnyAction, ThunkDispatch } from "@reduxjs/toolkit";
-import axios from "axios";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, Navigate } from "react-router-dom";
@@ -7,7 +6,7 @@ import { fetchRegister } from "../../services/auth/slice";
 import styles from "./Register.module.css";
 
 const Register = () => {
-  const isAuth = useSelector((state: any) => state.auth.user);
+  const registerStatus = useSelector((state: any) => state.auth.status);
   const dispatch: ThunkDispatch<any, any, AnyAction> = useDispatch();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -20,11 +19,20 @@ const Register = () => {
     setName("");
     setPassword("");
   };
+  console.log(registerStatus);
+  
 
-  if (isAuth) {
-    alert("Registered successfully!");
-    return <Navigate to="/" />;
+  if (registerStatus === 'loading') {
+    return <>
+      <p>Form is being submited...</p>
+    </>
+    // return <Navigate to="/sign-in" />;
   }
+
+  if (registerStatus === 'succeeded') {
+    return <Navigate to="/sign-in" />;
+  }
+  
 
   return (
     <section className={styles.register}>

@@ -59,3 +59,29 @@
     border-top: #E84E1B 1px dashed;
     border-bottom: #E84E1B 1px dashed;
 }
+
+.logoutBtn {
+    background-color: #E84E1B;
+    border: none;
+    color: #F8F8F8;
+    padding: 7px 15px;
+    cursor: pointer;
+}
+
+.logoutBtn:hover {
+    border-top: #F8F8F8 1px dashed;
+    border-bottom: #F8F8F8 1px dashed;
+}
+
+.orderBtn {
+    background-color: #4eb543;
+    border: none;
+    color: #F8F8F8;
+    padding: 7px 15px;
+    cursor: pointer;
+}
+
+.orderBtn:hover {
+    border-top: #F8F8F8 1px dashed;
+    border-bottom: #F8F8F8 1px dashed;
+}
