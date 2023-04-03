@@ -35,6 +35,18 @@ export const fetchRegister = createAsyncThunk('auth/fetchRegister', async ({ nam
     }
   });
 
+  export const fetchMe = createAsyncThunk('auth/fetchMe', async () => {
+    try {
+      const { data } = await AuthService.getMe();
+      console.log(data);
+      
+      return data;
+    } catch (error) {
+      console.log(error);
+      throw error;
+    }
+  });
+
 const initialState: IInitialState = {
     user: null,
     status: 'idle',
@@ -72,6 +84,17 @@ const authSlice = createSlice({
                 state.user = action.payload;
             })
             .addCase(fetchLogin.rejected, (state, action) => {
+                state.status = 'failed';
+                state.error = action.error.message;
+            })
+            .addCase(fetchMe.pending, (state) => {
+                state.status = 'loading';
+            })
+            .addCase(fetchMe.fulfilled, (state, action) => {
+                state.status = 'succeeded';
+                state.user = action.payload;
+            })
+            .addCase(fetchMe.rejected, (state, action) => {
                 state.status = 'failed';
                 state.error = action.error.message;
             })

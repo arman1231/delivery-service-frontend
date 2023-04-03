@@ -7,8 +7,16 @@ import NotFound from '../../pages/NotFound/NotFound';
 import Layout from '../Layout/Layout';
 import Dashboard from '../../pages/Dashboard/Dashboard';
 import Profile from '../../pages/Profile/Profile';
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { fetchMe } from '../../services/auth/slice';
 
 function App() {
+  const dispatch: any = useDispatch()
+  useEffect(() => {
+    dispatch(fetchMe())
+  }, [])
+  
   return (
     <div className={styles.page}>
       <Routes>
