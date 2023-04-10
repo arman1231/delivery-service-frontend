@@ -4,9 +4,9 @@ const BASE_URL = 'http://localhost:8081/auth'
 const api = axios.create({
     baseURL: BASE_URL
 })
-const token = localStorage.getItem('token') ? localStorage.getItem('token') : ''
+const token = localStorage.getItem('token') ? `Bearer ${localStorage.getItem('token')}` : ''
 api.interceptors.request.use((config) => {
-     config.headers.Authorization = `Bearer ${token}`
+     config.headers.Authorization = token;
     return config
 })
 
