@@ -12,7 +12,7 @@ export default class AuthService {
     }
 
     static async getMe() {
-        return api.get('/auth/user/me')
+        return api.get('/user/me')
     }
 
 }
