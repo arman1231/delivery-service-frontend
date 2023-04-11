@@ -9,7 +9,9 @@ interface RegisterPayload {
 
 interface IInitialState {
     user: any,
-    status: string,
+    registerStatus: string,
+    loginStatus: string,
+    fetchMeStatus: string,
     error: null | string | undefined,
 }
 
@@ -49,7 +51,9 @@ export const fetchRegister = createAsyncThunk('auth/fetchRegister', async ({ nam
 
 const initialState: IInitialState = {
     user: null,
-    status: 'idle',
+    registerStatus: 'idle',
+    loginStatus: 'idle',
+    fetchMeStatus: 'idle',
     error: null
 };
 
@@ -59,43 +63,43 @@ const authSlice = createSlice({
     reducers: {
         logout: (state) => {
             state.user = null
-            state.status = 'idle'
+            state.loginStatus = 'idle'
             state.error = null
         }
     },
     extraReducers: (builder) => {
         builder
             .addCase(fetchRegister.pending, (state) => {
-                state.status = 'loading';
+                state.registerStatus = 'loading';
             })
             .addCase(fetchRegister.fulfilled, (state, action) => {
-                state.status = 'succeeded';
-                state.user = action.payload;
+                state.registerStatus = 'succeeded';
+                // state.user = action.payload;
             })
             .addCase(fetchRegister.rejected, (state, action) => {
-                state.status = 'failed';
+                state.registerStatus = 'failed';
                 state.error = action.error.message;
             })
             .addCase(fetchLogin.pending, (state) => {
-                state.status = 'loading';
+                state.loginStatus = 'loading';
             })
             .addCase(fetchLogin.fulfilled, (state, action) => {
-                state.status = 'succeeded';
+                state.loginStatus = 'succeeded';
                 state.user = action.payload;
             })
             .addCase(fetchLogin.rejected, (state, action) => {
-                state.status = 'failed';
+                state.loginStatus = 'failed';
                 state.error = action.error.message;
             })
             .addCase(fetchMe.pending, (state) => {
-                state.status = 'loading';
+                state.fetchMeStatus = 'loading';
             })
             .addCase(fetchMe.fulfilled, (state, action) => {
-                state.status = 'succeeded';
+                state.fetchMeStatus = 'succeeded';
                 state.user = action.payload;
             })
             .addCase(fetchMe.rejected, (state, action) => {
-                state.status = 'failed';
+                state.fetchMeStatus = 'failed';
                 state.error = action.error.message;
             })
     }

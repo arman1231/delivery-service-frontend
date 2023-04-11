@@ -7,6 +7,7 @@ import styles from "./Login.module.css";
 
 const Login = () => {
   const isAuth = useSelector((state: any) => state.auth.user);
+  const loginStatus = useSelector((state: any) => state.auth.loginStatus);
   const dispatch: ThunkDispatch<any, any, AnyAction> = useDispatch();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -18,7 +19,7 @@ const Login = () => {
     setPassword("");
   };
 
-  if (isAuth) {
+  if (loginStatus === 'succeeded') {
     return <Navigate to="/dashboard" />;
   }
 

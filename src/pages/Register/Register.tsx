@@ -6,7 +6,7 @@ import { fetchRegister } from "../../services/auth/slice";
 import styles from "./Register.module.css";
 
 const Register = () => {
-  const registerStatus = useSelector((state: any) => state.auth.status);
+  const registerStatus = useSelector((state: any) => state.auth.registerStatus);
   const dispatch: ThunkDispatch<any, any, AnyAction> = useDispatch();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -19,8 +19,6 @@ const Register = () => {
     setName("");
     setPassword("");
   };
-  console.log(registerStatus);
-  
 
   if (registerStatus === 'loading') {
     return <>
