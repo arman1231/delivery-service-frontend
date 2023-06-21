@@ -3,7 +3,7 @@ export interface AuthResponse {
         roleName: string
 }
 
-type OrderDestination = {
+export type OrderDestination = {
         city: "string"
         district: "string"
         receiverName: "string"
@@ -12,10 +12,11 @@ type OrderDestination = {
         [key: string]: string;
 }
 
-type Parsel = {
-        id: number
-        type: string
-        weight: number
+export type Parsel = {
+        id: number;
+        type: string;
+        weight: number;
+        [key: string]: string | number;
 }
 
 export type Order = {
