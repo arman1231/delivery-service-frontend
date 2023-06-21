@@ -6,6 +6,7 @@ import { AnyAction, ThunkDispatch } from '@reduxjs/toolkit'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchOrders } from '../../services/orders/slice'
 import { Order, Parsel } from '../../utils/api/types'
+import { OrderControls } from '../../components/OrderControls/OrderControls'
 
 const Dashboard = () => {
   const dispatch: ThunkDispatch<any, any, AnyAction> = useDispatch();
@@ -28,6 +29,7 @@ const Dashboard = () => {
   return (
     <section className={styles.dashboard}>
       <PageTitle>Dashboard</PageTitle>
+      <OrderControls />
       <div className={styles.filters}>
         <form>
           <label htmlFor="city-select">Ваш город</label>

@@ -1,0 +1,28 @@
+.orderControls {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.control {
+    background: none;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 20px;
+    border-radius: 5px;
+    outline: none;
+    border: 1px #EF5A2B solid;
+    cursor: pointer;
+}
+
+.control:hover {
+    background: rgba(230, 80, 29, 0.1);
+}
+
+.control svg {
+    fill: #EF5A2B;
+    width: 30px;
+    height: 30px;
+}
