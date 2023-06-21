@@ -1,5 +1,5 @@
 import { AxiosResponse } from "axios";
-import api from "./apiConfig";
+import { api } from "./apiConfig";
 import { AuthResponse } from "./types";
 
 export default class AuthService {
