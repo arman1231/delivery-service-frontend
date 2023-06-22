@@ -3,7 +3,7 @@ import styles from "./AddOrderForm.module.css";
 import { ParselTypes } from "../../utils/api/types";
 
 interface IAddOrderFormProps {
-    handleCloseModal: () => void;
+  handleCloseModal: () => void;
 }
 
 export const AddOrderForm = ({ handleCloseModal }: IAddOrderFormProps) => {
@@ -13,48 +13,60 @@ export const AddOrderForm = ({ handleCloseModal }: IAddOrderFormProps) => {
     receiverName: "",
     receiverPhone: "",
     receiverSurname: "",
-    type: "",
-    weight: 0,
+    parsels: [{ type: "", weight: 0 }],
   });
 
+  // const handleInputChange = (
+  //   e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  // ) => {
+  //   setState({ ...state, [e.target.name]: e.target.value });
+  // };
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
-    setState({
-      ...state,
-      [e.target.name]: e.target.value,
-    });
+    const { name, value } = e.target;
+    if (name.startsWith("parsels")) {
+      const index = parseInt(name.split("-")[1]);
+      setState((prevState) => ({
+        ...prevState,
+        parsels: prevState.parsels.map((p, i) =>
+          i === index ? { ...p, [name.split("-")[2]]: value } : p
+        ),
+      }));
+    } else {
+      setState({ ...state, [name]: value });
+    }
   };
 
   const handleSubmit: React.FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
     setState({
-        city: "",
-        district: "",
-        receiverName: "",
-        receiverPhone: "",
-        receiverSurname: "",
-        type: "",
-        weight: 0,
-      })
+      city: "",
+      district: "",
+      receiverName: "",
+      receiverPhone: "",
+      receiverSurname: "",
+      parsels: [{ type: "", weight: 0 }],
+    });
     handleCloseModal();
     console.log({
-        "destination": {
-          "city": state.city,
-          "district": state.district,
-          "receiverName": state.receiverName,
-          "receiverPhone": state.receiverPhone,
-          "receiverSurname": state.receiverSurname
-        },
-        "parcels": [
-          {
-            "type": state.type,
-            "weight": state.weight
-          }
-        ]
-      });
-    
-  }
+      destination: {
+        city: state.city,
+        district: state.district,
+        receiverName: state.receiverName,
+        receiverPhone: state.receiverPhone,
+        receiverSurname: state.receiverSurname,
+      },
+      parcels: state.parsels,
+    });
+  };
+
+  const handleAddParsel = () => {
+    setState((prevState) => ({
+      ...prevState,
+      parsels: [...prevState.parsels, { type: "", weight: 0 }],
+    }));
+  };
   console.log(state);
 
   return (
@@ -114,31 +126,43 @@ export const AddOrderForm = ({ handleCloseModal }: IAddOrderFormProps) => {
         </fieldset>
         <fieldset className={styles.fieldset}>
           <h3 className={styles.fieldsetCaption}>Parcel</h3>
-          <label htmlFor="type">Type</label>
-          <select
-            name="type"
-            value={state.type}
-            onChange={handleInputChange}
-            id="parcel-type-select"
-            required
-          >
-            <option value="" disabled>-- Select type --</option>
-            {Object.values(ParselTypes).map((option) => (
-              <option key={option} value={option}>
-                {option}
-              </option>
-            ))}
-          </select>
-          <label htmlFor="surname">Weight (kg)</label>
-          <input
-            type="number"
-            name="weight"
-            onChange={handleInputChange}
-            value={state.weight}
-            required
-          />
+          {state.parsels.map((p, i) => (
+            <div className={styles.parsel} key={i}>
+              <label htmlFor={`parsels-${i}-type`}>Type</label>
+              <select
+                name={`parsels-${i}-type`}
+                value={p.type}
+                onChange={handleInputChange}
+                required
+              >
+                <option value="" disabled>
+                  -- Select type --
+                </option>
+                {Object.values(ParselTypes).map((option) => (
+                  <option key={option} value={option}>
+                    {option}
+                  </option>
+                ))}
+              </select>
+              <label htmlFor={`parsels-${i}-weight`}>Weight (kg)</label>
+              <input
+                type="number"
+                name={`parsels-${i}-weight`}
+                value={p.weight}
+                onChange={handleInputChange}
+                required
+              />
+            </div>
+          ))}
         </fieldset>
         <div className={styles.buttonWrapper}>
+          <button
+            type="button"
+            onClick={handleAddParsel}
+            className={`${styles.submitButton} ${styles.addParsel}`}
+          >
+            Add Parsel
+          </button>
           <button className={styles.submitButton} type="submit">
             Create
           </button>

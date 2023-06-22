@@ -11,8 +11,8 @@
   
   .closeButton {
     position: absolute;
-    right: 5%;
-    top: 5%;
+    right: 8%;
+    top: 3%;
     background-color: transparent;
     border: none;
     padding: 0;
@@ -26,3 +26,6 @@
     height: 35px;
   }
   
+  .closeIcon:hover {
+    fill: #9e2905;
+  }

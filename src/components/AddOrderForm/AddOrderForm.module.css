@@ -45,3 +45,16 @@
 .buttonWrapper {
     text-align: center;
 }
+
+.parsel {
+    display: flex;
+    gap: 5px;
+    flex-direction: row;
+    border: 1px white dashed;
+    padding: 5px;
+}
+
+.addParsel {
+    background-color: rgb(127, 156, 83);
+    margin-right: 20px;
+}
