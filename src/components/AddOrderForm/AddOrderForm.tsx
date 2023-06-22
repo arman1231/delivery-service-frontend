@@ -92,6 +92,11 @@ export const AddOrderForm = () => {
             value={state.weight}
           />
         </fieldset>
+        <div className={styles.buttonWrapper}>
+          <button className={styles.submitButton} type="submit">
+            Create
+          </button>
+        </div>
       </form>
     </div>
   );

@@ -26,3 +26,18 @@
     padding-bottom: 0;
     margin-bottom: 0;
 }
+
+.submitButton {
+    background-color: #EF5A2B;
+    color: white;
+    border: none;
+    outline: none;
+    padding: 10px 25px;
+    margin-top: 25px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.buttonWrapper {
+    text-align: center;
+}
