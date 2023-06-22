@@ -10,8 +10,19 @@
 
 .fieldset {
     display: flex;
+    gap: 5px;
     flex-direction: column;
     border: none;
     margin: 0;
     padding: 0;
+}
+.fieldsetCaption {
+    padding-bottom: 0;
+    margin-bottom: 5px;
+}
+
+.fieldsetCaption::first-letter {
+    color: #EF5A2B;
+    padding-bottom: 0;
+    margin-bottom: 0;
 }

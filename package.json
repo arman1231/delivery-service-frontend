@@ -23,7 +23,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "dev": "concurrently \"npm run start\" \"npm run server\"",
+    "dev": "concurrently \"npm PORT=3999 start\" \"npm run server\"",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
