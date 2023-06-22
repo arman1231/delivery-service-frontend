@@ -2,7 +2,11 @@ import React, { ChangeEventHandler, useState } from "react";
 import styles from "./AddOrderForm.module.css";
 import { ParselTypes } from "../../utils/api/types";
 
-export const AddOrderForm = () => {
+interface IAddOrderFormProps {
+    handleCloseModal: () => void;
+}
+
+export const AddOrderForm = ({ handleCloseModal }: IAddOrderFormProps) => {
   const [state, setState] = useState({
     city: "",
     district: "",
@@ -21,12 +25,42 @@ export const AddOrderForm = () => {
       [e.target.name]: e.target.value,
     });
   };
+
+  const handleSubmit: React.FormEventHandler<HTMLFormElement> = (e) => {
+    e.preventDefault();
+    setState({
+        city: "",
+        district: "",
+        receiverName: "",
+        receiverPhone: "",
+        receiverSurname: "",
+        type: "",
+        weight: 0,
+      })
+    handleCloseModal();
+    console.log({
+        "destination": {
+          "city": state.city,
+          "district": state.district,
+          "receiverName": state.receiverName,
+          "receiverPhone": state.receiverPhone,
+          "receiverSurname": state.receiverSurname
+        },
+        "parcels": [
+          {
+            "type": state.type,
+            "weight": state.weight
+          }
+        ]
+      });
+    
+  }
   console.log(state);
 
   return (
     <div className={styles.addOrderForm}>
       <h2 className={styles.addOrderFormCaption}>Add Order</h2>
-      <form className={styles.form}>
+      <form className={styles.form} onSubmit={handleSubmit}>
         <fieldset className={styles.fieldset}>
           <h3 className={styles.fieldsetCaption}>Destination</h3>
           <label htmlFor="city">City</label>
@@ -77,7 +111,7 @@ export const AddOrderForm = () => {
             onChange={handleInputChange}
             id="parcel-type-select"
           >
-            <option value="">-- Select type --</option>
+            <option value="" disabled>-- Select type --</option>
             {Object.values(ParselTypes).map((option) => (
               <option key={option} value={option}>
                 {option}

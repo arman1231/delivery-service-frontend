@@ -38,6 +38,10 @@
     cursor: pointer;
 }
 
+.submitButton:hover {
+    background-color: #9e2905;
+}
+
 .buttonWrapper {
     text-align: center;
 }
