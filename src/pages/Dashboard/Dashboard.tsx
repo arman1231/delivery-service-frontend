@@ -7,6 +7,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import { fetchOrders } from '../../services/orders/slice'
 import { Order, Parsel } from '../../utils/api/types'
 import { OrderControls } from '../../components/OrderControls/OrderControls'
+import { Modal } from '../../components/Modal/Modal'
+import { AddOrderForm } from '../../components/AddOrderForm/AddOrderForm'
 
 const Dashboard = () => {
   const dispatch: ThunkDispatch<any, any, AnyAction> = useDispatch();
@@ -77,6 +79,9 @@ const Dashboard = () => {
           )
         }) : <p>There is no orders...</p>}
       </div>
+      <Modal handleCloseModal={() => {}}>
+        <AddOrderForm />
+      </Modal>
     </section>
   )
 }

@@ -1,0 +1,28 @@
+.modal {
+    position: relative;
+    color: white;
+    background-color: #18213F;
+    border-radius: 40px;
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
+  
+  .closeButton {
+    position: absolute;
+    right: 5%;
+    top: 5%;
+    background-color: transparent;
+    border: none;
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
+  }
+
+  .closeIcon {
+    fill: #EF5A2B;
+    width: 35px;
+    height: 35px;
+  }
+  

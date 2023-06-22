@@ -1,0 +1,17 @@
+.addOrderFormCaption {
+    text-align: center;
+    padding-bottom: 0;
+    margin-bottom: 0;
+}
+
+.form {
+    padding: 0 25px 25px 25px;
+}
+
+.fieldset {
+    display: flex;
+    flex-direction: column;
+    border: none;
+    margin: 0;
+    padding: 0;
+}

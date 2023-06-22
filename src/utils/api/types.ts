@@ -12,9 +12,16 @@ export type OrderDestination = {
         [key: string]: string;
 }
 
+export enum ParselTypes {
+        EXTRA_LARGE = 'EXTRA_LARGE',
+        LARGE = 'LARGE',
+        MEDIUM = 'MEDIUM',
+        SMALL = 'SMALL'
+}
+
 export type Parsel = {
         id: number;
-        type: string;
+        type: ParselTypes;
         weight: number;
         [key: string]: string | number;
 }
