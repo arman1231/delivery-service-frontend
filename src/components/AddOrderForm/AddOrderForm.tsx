@@ -69,6 +69,8 @@ export const AddOrderForm = ({ handleCloseModal }: IAddOrderFormProps) => {
             name="city"
             onChange={handleInputChange}
             value={state.city}
+            minLength={3}
+            required
           />
           <label htmlFor="district">District</label>
           <input
@@ -76,6 +78,8 @@ export const AddOrderForm = ({ handleCloseModal }: IAddOrderFormProps) => {
             name="district"
             onChange={handleInputChange}
             value={state.district}
+            minLength={3}
+            required
           />
         </fieldset>
         <fieldset className={styles.fieldset}>
@@ -86,6 +90,8 @@ export const AddOrderForm = ({ handleCloseModal }: IAddOrderFormProps) => {
             name="receiverName"
             onChange={handleInputChange}
             value={state.receiverName}
+            minLength={2}
+            required
           />
           <label htmlFor="surname">Surname</label>
           <input
@@ -93,13 +99,17 @@ export const AddOrderForm = ({ handleCloseModal }: IAddOrderFormProps) => {
             name="receiverSurname"
             onChange={handleInputChange}
             value={state.receiverSurname}
+            minLength={2}
+            required
           />
           <label htmlFor="phone">Phone</label>
           <input
-            type="text"
+            type="number"
             name="receiverPhone"
             onChange={handleInputChange}
             value={state.receiverPhone}
+            minLength={7}
+            required
           />
         </fieldset>
         <fieldset className={styles.fieldset}>
@@ -110,6 +120,7 @@ export const AddOrderForm = ({ handleCloseModal }: IAddOrderFormProps) => {
             value={state.type}
             onChange={handleInputChange}
             id="parcel-type-select"
+            required
           >
             <option value="" disabled>-- Select type --</option>
             {Object.values(ParselTypes).map((option) => (
@@ -124,6 +135,7 @@ export const AddOrderForm = ({ handleCloseModal }: IAddOrderFormProps) => {
             name="weight"
             onChange={handleInputChange}
             value={state.weight}
+            required
           />
         </fieldset>
         <div className={styles.buttonWrapper}>
