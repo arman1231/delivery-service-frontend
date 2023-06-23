@@ -48,6 +48,7 @@
 
 .parsel {
     display: flex;
+    align-items: center;
     gap: 5px;
     flex-direction: row;
     border: 1px white dashed;

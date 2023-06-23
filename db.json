@@ -1,42 +1,6 @@
 {
   "order": [
     {
-      "id": 1,
-      "status": "CREATED",
-      "destination": {
-        "city": "Moscow",
-        "district": "Ramenki",
-        "receiverName": "Artur",
-        "receiverSurname": "Magomegov",
-        "receiverPhone": "+79067420700"
-      },
-      "parcels": [
-        {
-          "id": 1,
-          "type": "EXTRA_LARGE",
-          "weight": 0
-        }
-      ]
-    },
-    {
-      "id": 2,
-      "status": "CREATED",
-      "destination": {
-        "city": "Moscow",
-        "district": "Ramenki",
-        "receiverName": "Artur",
-        "receiverSurname": "Magomegov",
-        "receiverPhone": "+79067420700"
-      },
-      "parcels": [
-        {
-          "id": 1,
-          "type": "EXTRA_LARGE",
-          "weight": 0
-        }
-      ]
-    },
-    {
       "id": 3,
       "status": "ASSIGNED",
       "destination": {
@@ -55,22 +19,27 @@
       ]
     },
     {
-      "id": 4,
-      "status": "CREATED",
+      "id": 906,
       "destination": {
-        "city": "Moscow",
-        "district": "Ramenki",
-        "receiverName": "Artur",
-        "receiverSurname": "Mag",
-        "receiverPhone": "+79067420700"
+        "city": "Msk",
+        "district": "Ram",
+        "receiverName": "Arm",
+        "receiverPhone": "1378712",
+        "receiverSurname": "Che"
       },
       "parcels": [
         {
-          "id": 1,
           "type": "EXTRA_LARGE",
-          "weight": 0
+          "weight": "12",
+          "id": 27
+        },
+        {
+          "type": "SMALL",
+          "weight": "5",
+          "id": 821
         }
-      ]
+      ],
+      "status": "CREATED"
     }
   ]
 }

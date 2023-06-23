@@ -4,11 +4,11 @@ export interface AuthResponse {
 }
 
 export type OrderDestination = {
-        city: "string"
-        district: "string"
-        receiverName: "string"
-        receiverSurname: "string"
-        receiverPhone: "string"
+        city: string;
+        district: string;
+        receiverName: string;
+        receiverSurname: string;
+        receiverPhone: string;
         [key: string]: string;
 }
 
@@ -26,9 +26,16 @@ export type Parsel = {
         [key: string]: string | number;
 }
 
+export type ParselPayload = Omit<Parsel, 'id'>
+
 export type Order = {
         id: number;
         status: string;
         destination: OrderDestination;
         parcels: Parsel[];
+}
+
+export type PostOrderPayload = {
+        destination: OrderDestination;
+        parcels: ParselPayload[];
 }

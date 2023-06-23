@@ -1,12 +1,16 @@
 import React, { ChangeEventHandler, useState } from "react";
 import styles from "./AddOrderForm.module.css";
 import { ParselTypes } from "../../utils/api/types";
+import { useDispatch } from "react-redux";
+import { AnyAction, ThunkDispatch } from "@reduxjs/toolkit";
+import { postOrder } from "../../services/orders/slice";
 
 interface IAddOrderFormProps {
   handleCloseModal: () => void;
 }
 
 export const AddOrderForm = ({ handleCloseModal }: IAddOrderFormProps) => {
+  const dispatch: ThunkDispatch<any, any, AnyAction> = useDispatch();
   const [state, setState] = useState({
     city: "",
     district: "",
@@ -59,6 +63,16 @@ export const AddOrderForm = ({ handleCloseModal }: IAddOrderFormProps) => {
       },
       parcels: state.parsels,
     });
+    dispatch(postOrder({
+      destination: {
+        city: state.city,
+        district: state.district,
+        receiverName: state.receiverName,
+        receiverPhone: state.receiverPhone,
+        receiverSurname: state.receiverSurname,
+      },
+      parcels: state.parsels,
+    }))
   };
 
   const handleAddParsel = () => {

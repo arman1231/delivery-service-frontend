@@ -57,7 +57,7 @@ const Dashboard = () => {
       </div>
       <div className={styles.orders}>
         {orders && orders?.length !== 0 ? (
-          orders.map((order: Order) => {
+          orders?.map((order: Order) => {
             const { destination, id, status, parcels } = order;
             return (
               <div key={order.id} className={styles.order}>
@@ -81,11 +81,12 @@ const Dashboard = () => {
                   ))}
                 </div>
                 <div className={styles.orderParsels}>
-                  {parcels.map((parcel: Parsel) => (
-                    <div className={styles.orderDestinationItem}>
-                      <p style={{ textAlign: "center", fontWeight: "bold" }}>
+                <p style={{ textAlign: "center", fontWeight: "bold" }}>
                         Parsels:
                       </p>
+                  {parcels.map((parcel: Parsel) => (
+                    <div className={styles.orderDestinationItem}>
+                      
                       {Object.keys(parcel).map((key, i) => (
                         <div key={i} className={styles.orderDestinationItem}>
                           <span className={styles.orderDestinationItemCaption}>

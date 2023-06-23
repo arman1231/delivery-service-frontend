@@ -3,11 +3,14 @@
     padding: 10px;
     border: 1px solid #18213F;
     border-radius: 20px;
+    min-width: 250px;
 }
 
 .orders {
     display: flex;
     gap: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
 .filters {
