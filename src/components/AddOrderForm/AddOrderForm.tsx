@@ -174,7 +174,7 @@ export const AddOrderForm = ({ handleCloseModal }: IAddOrderFormProps) => {
                 onChange={handleInputChange}
                 required
               />
-              {i !== 0 &&  <button onClick={() => handleRemoveParcel(i)}><SlMinus className={styles.removeParcelIcon} /></button>}
+              {i !== 0 && <SlMinus className={styles.removeParcelIcon} onClick={() => handleRemoveParcel(i)} />}
             </div>
           ))}
         </fieldset>
