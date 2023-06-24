@@ -1,4 +1,3 @@
-import axios from "axios";
 import PageTitle from "../../components/PageTitle/PageTitle";
 import styles from "./Dashboard.module.css";
 import { useEffect, useState } from "react";

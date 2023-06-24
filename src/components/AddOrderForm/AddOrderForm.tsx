@@ -4,6 +4,7 @@ import { ParselTypes } from "../../utils/api/types";
 import { useDispatch } from "react-redux";
 import { AnyAction, ThunkDispatch } from "@reduxjs/toolkit";
 import { postOrder } from "../../services/orders/slice";
+import { SlMinus } from 'react-icons/sl';
 
 interface IAddOrderFormProps {
   handleCloseModal: () => void;
@@ -81,6 +82,13 @@ export const AddOrderForm = ({ handleCloseModal }: IAddOrderFormProps) => {
       parsels: [...prevState.parsels, { type: "", weight: 0 }],
     }));
   };
+
+  const handleRemoveParcel = (i: number) => {
+    setState((prevState) => ({
+      ...prevState,
+      parsels: prevState.parsels.filter((parsel, id) => id !== i)
+    }))
+  }
   console.log(state);
 
   return (
@@ -166,6 +174,7 @@ export const AddOrderForm = ({ handleCloseModal }: IAddOrderFormProps) => {
                 onChange={handleInputChange}
                 required
               />
+              {i !== 0 &&  <button onClick={() => handleRemoveParcel(i)}><SlMinus className={styles.removeParcelIcon} /></button>}
             </div>
           ))}
         </fieldset>

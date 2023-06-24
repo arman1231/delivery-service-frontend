@@ -59,3 +59,13 @@
     background-color: rgb(127, 156, 83);
     margin-right: 20px;
 }
+
+.removeParcelIcon {
+    cursor: pointer;
+    fill: #EF5A2B;
+}
+
+.removeParcelIcon:hover {
+    fill: white;
+}
+
