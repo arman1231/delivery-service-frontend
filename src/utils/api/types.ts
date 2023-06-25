@@ -19,20 +19,20 @@ export enum ParselTypes {
         SMALL = 'SMALL'
 }
 
-export type Parsel = {
+export type TParsel = {
         id: number;
         type: ParselTypes;
         weight: number;
         [key: string]: string | number;
 }
 
-export type ParselPayload = Omit<Parsel, 'id'>
+export type ParselPayload = Omit<TParsel, 'id'>
 
-export type Order = {
+export type TOrder = {
         id: number;
         status: string;
         destination: OrderDestination;
-        parcels: Parsel[];
+        parcels: TParsel[];
 }
 
 export type PostOrderPayload = {

@@ -1,10 +1,10 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import AuthService from '../../utils/api/authApi';
 import OrdersService from '../../utils/api/ordersApi';
-import { Order, PostOrderPayload } from '../../utils/api/types';
+import { TOrder, PostOrderPayload } from '../../utils/api/types';
 
 interface IInitialState {
-    orders: Order[],
+    orders: TOrder[],
     fetchOrders: string,
     error: null | string | undefined,
 }
