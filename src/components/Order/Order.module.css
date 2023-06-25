@@ -4,6 +4,7 @@
     border: 1px solid #18213F;
     border-radius: 20px;
     min-width: 250px;
+    position: relative;
 }
 
 .orderTitle {
@@ -36,4 +37,65 @@
 .orderDestinationItemCaption {
     font-weight: bold;
     line-height: 22px;
+}
+
+.orderTooltipContols {
+    position: absolute;
+    top: 6%;
+    right: 5%;
+    fill: #EF5A2B;
+    width: 25px;
+    height: 25px;
+    cursor: pointer;
+}
+
+.orderTooltip {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    border-radius: 20px;
+    padding: 25px 10px;
+    background-color: #18213F;
+    color: white;
+}
+
+.orderTooltipMenu {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    /* gap: 10px; */
+    padding: 0;
+    margin: 45px 0 0 0;
+}
+
+.orderTooltipMenuItem {
+    border: 1px solid white;
+    /* width: 100%; */
+    padding: 10px;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    cursor: pointer;
+}
+
+.orderTooltipMenuItem:hover {
+    background-color: white;
+    color: #18213F;
+}
+
+.menuItemIcon {
+    width: 25px;
+    height: 25px;
+}
+
+.closeIcon {
+    cursor: pointer;
+    width: 25px;
+    height: 25px;
+    position: absolute;
+    right: 5%;
+    /* margin: 0 auto;
+    padding-bottom: inherit; */
 }
