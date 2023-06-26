@@ -1,10 +1,6 @@
 import PageTitle from "../../components/PageTitle/PageTitle";
 import styles from "./Dashboard.module.css";
-import { useEffect, useState } from "react";
-import { AnyAction, ThunkDispatch } from "@reduxjs/toolkit";
-import { useDispatch, useSelector } from "react-redux";
-import { fetchOrders } from "../../services/orders/slice";
-import { TOrder } from "../../utils/api/types";
+import { useState } from "react";
 import { OrderControls } from "../../components/OrderControls/OrderControls";
 import { Modal } from "../../components/Modal/Modal";
 import { AddOrderForm } from "../../components/AddOrderForm/AddOrderForm";
