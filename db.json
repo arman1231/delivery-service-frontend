@@ -40,6 +40,24 @@
         }
       ],
       "status": "CREATED"
+    },
+    {
+      "id": 987,
+      "destination": {
+        "city": "Erevan",
+        "district": "evn",
+        "receiverName": "Arman",
+        "receiverPhone": "89067420762",
+        "receiverSurname": "Che"
+      },
+      "parcels": [
+        {
+          "type": "SMALL",
+          "weight": "12",
+          "id": 117
+        }
+      ],
+      "status": "CREATED"
     }
   ]
 }

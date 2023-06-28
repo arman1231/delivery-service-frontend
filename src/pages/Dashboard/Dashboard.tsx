@@ -7,47 +7,61 @@ import { AddOrderForm } from "../../components/AddOrderForm/AddOrderForm";
 import { OrdersList } from "../../components/OrdersList/OrdersList";
 
 const Dashboard = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState({
+    addOrderModal: false,
+    sortByModal: false
+  });
 
   const handleCloseModal = () => {
-    setIsModalOpen((prev) => !prev)
+    setIsModalOpen({ ...isModalOpen, addOrderModal: false, sortByModal: false })
+  }
+
+  const handleOpenAddOrderModal = () => {
+    setIsModalOpen({ ...isModalOpen, addOrderModal: !isModalOpen.addOrderModal })
+  }
+
+  const handleOpenSortByModal = () => {
+    setIsModalOpen({ ...isModalOpen, sortByModal: !isModalOpen.sortByModal })
   }
 
   const options = [
-    { value: "petersburg", name: "Санкт-Петербург" },
-    { value: "samara", name: "Самара" },
-    { value: "perm", name: "Пермь" },
-    { value: "novosibirsk", name: "Новосибирск" },
+    { value: "assigned", name: "Assigned" },
+    { value: "created", name: "Created" },
+    { value: "canceled", name: "Canceled" },
   ];
 
   return (
     <section className={styles.dashboard}>
       <PageTitle>Dashboard</PageTitle>
-      <OrderControls handleCloseModal={handleCloseModal} />
-      <div className={styles.filters}>
-        <form>
-          <label htmlFor="city-select">Ваш город</label>
-          <select
-            name="city"
-            value="-- Выберите город --"
-            id="city-select"
-            onChange={(e) => console.log(e.target.value)}
-          >
-            <option value="" disabled>
-              -- Выберите город --
-            </option>
-            {options.map((option) => (
-              <option key={option.value} value={option.value}>
-                {option.name}
-              </option>
-            ))}
-          </select>
-        </form>
-      </div>
+      <OrderControls handleOpenAddOrderModal={handleOpenAddOrderModal} handleOpenSortByModal={handleOpenSortByModal} />
       <OrdersList />
-      {isModalOpen && (
+      {!!isModalOpen.addOrderModal && (
         <Modal handleCloseModal={handleCloseModal}>
           <AddOrderForm handleCloseModal={handleCloseModal} />
+        </Modal>
+      )}
+      {!!isModalOpen.sortByModal && (
+        <Modal handleCloseModal={handleCloseModal}>
+          <div className={styles.filters}>
+            <form>
+              <label htmlFor="status">Status:</label>
+              <select
+                name="status"
+                value="-- Select order status --"
+                id="status-select"
+                onChange={(e) => console.log(e.target.value)}
+              >
+                <option value="" disabled>
+                  -- Select order status --
+                </option>
+                {options.map((option) => (
+                  <option key={option.value} value={option.value}>
+                    {option.name}
+                  </option>
+                ))}
+              </select>
+            </form>
+          </div>
         </Modal>
       )}
     </section>

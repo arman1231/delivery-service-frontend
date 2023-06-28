@@ -1,4 +1,10 @@
+.dashboard {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
 .filters {
     display: flex;
     padding: 20px 0;
+    margin: 40px 20px;
 }
