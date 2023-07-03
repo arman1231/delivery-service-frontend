@@ -7,6 +7,6 @@ export default class OrdersService {
     }
 
     static async addOrder(order: PostOrderPayload) {
-        return orders_api.post('/', { order })
+        return orders_api.post('/', order)
     }
 }

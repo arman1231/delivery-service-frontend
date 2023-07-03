@@ -10,7 +10,7 @@ api.interceptors.request.use((config) => {
     return config
 })
 
-const BASE_ORDERS_URL = 'http://localhost:3777/order'
+const BASE_ORDERS_URL = 'http://localhost:8082/order'
 
 const orders_api = axios.create({
   baseURL: BASE_ORDERS_URL

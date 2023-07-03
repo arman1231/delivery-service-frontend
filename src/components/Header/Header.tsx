@@ -10,7 +10,8 @@ const Header = () => {
   const isAuth = useSelector((state: any) => state.auth.user);
   const dispatch: any = useDispatch()
   const navigate = useNavigate();
-
+  const user = useSelector((state: any) => state.auth.user)
+  
   const logoutFunc = () => {
     dispatch(logout())
     localStorage.clear()
@@ -43,11 +44,21 @@ const Header = () => {
                     : styles.navItem
                 }
               >
-                <FaUserCircle className={styles.navItemIcon} /> Profile
+                <FaUserCircle className={styles.navItemIcon} /> {!!user ? user.name : 'Profile'}
               </NavLink>
             </li>
             <li>
-              <button className={styles.orderBtn}>Create order</button>
+            <NavLink
+                to="/dashboard"
+                className={({ isActive }) =>
+                  isActive
+                    ? `${styles.navItem} ${styles.active}`
+                    : styles.navItem
+                }
+              >
+                <button className={styles.orderBtn}>Dashboard</button>
+              </NavLink>
+              {/* <button className={styles.orderBtn}>Dashboard</button> */}
             </li>
             <li>
               <button onClick={handleButtonClick} className={styles.logoutBtn}>Logout</button>

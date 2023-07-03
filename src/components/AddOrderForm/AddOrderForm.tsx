@@ -1,4 +1,4 @@
-import React, { ChangeEventHandler, useState } from "react";
+import React, { useState } from "react";
 import styles from "./AddOrderForm.module.css";
 import { ParselTypes } from "../../utils/api/types";
 import { useDispatch } from "react-redux";
@@ -21,17 +21,13 @@ export const AddOrderForm = ({ handleCloseModal }: IAddOrderFormProps) => {
     parsels: [{ type: "", weight: 0 }],
   });
 
-  // const handleInputChange = (
-  //   e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
-  // ) => {
-  //   setState({ ...state, [e.target.name]: e.target.value });
-  // };
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
     const { name, value } = e.target;
     if (name.startsWith("parsels")) {
       const index = parseInt(name.split("-")[1]);
+      console.log(name);
       setState((prevState) => ({
         ...prevState,
         parsels: prevState.parsels.map((p, i) =>
@@ -39,7 +35,10 @@ export const AddOrderForm = ({ handleCloseModal }: IAddOrderFormProps) => {
         ),
       }));
     } else {
-      setState({ ...state, [name]: value });
+      setState((prevState) => ({
+        ...prevState,
+        [name]: name === "weight" ? Number(value) : value,
+      }));
     }
   };
 
