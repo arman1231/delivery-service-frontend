@@ -9,9 +9,9 @@ interface IInitialState {
 }
 
 export const fetchOrders = createAsyncThunk("orders/fetchOrders", async () => {
-  const token = localStorage.getItem("token")
-    ? `Bearer ${localStorage.getItem("token")}`
-    : "";
+    const token = localStorage.getItem("token")
+? `Bearer ${localStorage.getItem("token")}`
+: "";
   try {
     const { data } = await OrdersService.getOrders(token);
     return data;
@@ -24,8 +24,11 @@ export const fetchOrders = createAsyncThunk("orders/fetchOrders", async () => {
 export const postOrder = createAsyncThunk(
   "orders/postOrder",
   async (order: PostOrderPayload) => {
+    const token = localStorage.getItem("token")
+? `Bearer ${localStorage.getItem("token")}`
+: "";
     try {
-      const { data } = await OrdersService.addOrder(order);
+      const { data } = await OrdersService.addOrder(order, token);
       return data;
     } catch (error) {
       console.log(error);

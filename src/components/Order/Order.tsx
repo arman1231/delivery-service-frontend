@@ -16,36 +16,17 @@ interface IOrderProps {
 export const Order = ({ order }: IOrderProps) => {
   const { destination, id, status, parcels } = order;
   const [isTooltipOpen, setTooltipOpen] = React.useState(false);
+  const [isModifyOrderOpen, setIsModifyOrderOpen] = React.useState(true);
   const dispatch: any = useDispatch();
 
-
-//   async function deleteOrder(id, token) {
-//     const url = `http://localhost:8082/order/${id}`;
-  
-//     try {
-//       const response = await fetch(url, {
-//         method: 'DELETE',
-//         headers: {
-//           Authorization: `Bearer ${token}`,
-//         },
-//       });
-  
-//       if (!response.ok) {
-//         throw new Error('Failed to delete order');
-//       }
-  
-//       const data = await response.json();
-//       return data;
-//     } catch (error) {
-//       console.log(error);
-//       throw error;
-//     }
-//   }
   const handleDeleteOrder = () => {
-    // const token = localStorage.getItem('token')
-    // deleteOrder(id, token)
-    dispatch(deleteOrderById(id))
+    dispatch(deleteOrderById(id));
   };
+
+  const handleCloseTooltip = () => {
+    setTooltipOpen(false);
+    setIsModifyOrderOpen(false)
+  }
   return (
     <div key={order.id} className={styles.order}>
       <h3 className={styles.orderTitle}>Order #{id}</h3>
@@ -57,13 +38,29 @@ export const Order = ({ order }: IOrderProps) => {
         <div className={styles.orderTooltip}>
           <IoCloseCircleOutline
             className={styles.closeIcon}
-            onClick={() => setTooltipOpen(false)}
+            onClick={handleCloseTooltip}
           />
           <ul className={styles.orderTooltipMenu}>
-            <li className={styles.orderTooltipMenuItem}>
-              <CiEdit className={styles.menuItemIcon} />
-              Modify Order
-            </li>
+            {isModifyOrderOpen ? (
+              <li className={styles.orderTooltipMenuItem}>
+                <div className={styles.modifyOrderInputContainer}>
+                  <input type="text" className={styles.modifyOrderInput} />
+                  <IoCloseCircleOutline
+                    onClick={() => setIsModifyOrderOpen(!isModifyOrderOpen)}
+                    className={styles.orderModifyOrderContols}
+                  />
+                </div>
+              </li>
+            ) : (
+              <li
+                className={styles.orderTooltipMenuItem}
+                onClick={() => setIsModifyOrderOpen(!isModifyOrderOpen)}
+              >
+                <CiEdit className={styles.menuItemIcon} />
+                Modify Destination
+              </li>
+            )}
+
             <li
               className={styles.orderTooltipMenuItem}
               onClick={handleDeleteOrder}
@@ -131,4 +128,3 @@ export const Order = ({ order }: IOrderProps) => {
     </div>
   );
 };
-
