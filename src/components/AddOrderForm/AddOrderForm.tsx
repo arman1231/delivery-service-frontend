@@ -37,7 +37,7 @@ export const AddOrderForm = ({ handleCloseModal }: IAddOrderFormProps) => {
     } else {
       setState((prevState) => ({
         ...prevState,
-        [name]: name === "weight" ? Number(value) : value,
+        [name]: name === "weight" ? parseInt(value) : value,
       }));
     }
   };
@@ -53,26 +53,22 @@ export const AddOrderForm = ({ handleCloseModal }: IAddOrderFormProps) => {
       parsels: [{ type: "", weight: 0 }],
     });
     handleCloseModal();
-    console.log({
-      destination: {
-        city: state.city,
-        district: state.district,
-        receiverName: state.receiverName,
-        receiverPhone: state.receiverPhone,
-        receiverSurname: state.receiverSurname,
-      },
-      parcels: state.parsels,
-    });
-    dispatch(postOrder({
-      destination: {
-        city: state.city,
-        district: state.district,
-        receiverName: state.receiverName,
-        receiverPhone: state.receiverPhone,
-        receiverSurname: state.receiverSurname,
-      },
-      parcels: state.parsels,
-    }))
+    console.log(state);
+    dispatch(
+      postOrder({
+        destination: {
+          city: state.city,
+          district: state.district,
+          receiverName: state.receiverName,
+          receiverPhone: state.receiverPhone,
+          receiverSurname: state.receiverSurname,
+        },
+        parcels: state.parsels.map((parcel) => ({
+          ...parcel,
+          weight: Number(parcel.weight),
+        })),
+      })
+    );
   };
 
   const handleAddParsel = () => {

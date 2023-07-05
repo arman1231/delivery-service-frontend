@@ -5,6 +5,7 @@ const api = axios.create({
     baseURL: BASE_AUTH_URL
 })
 const token = localStorage.getItem('token') ? `Bearer ${localStorage.getItem('token')}` : ''
+
 api.interceptors.request.use((config) => {
      config.headers.Authorization = token;
     return config
@@ -16,7 +17,7 @@ const orders_api = axios.create({
   baseURL: BASE_ORDERS_URL
 })
 orders_api.interceptors.request.use((config) => {
-  config.headers.Authorization = token;
+  // config.headers.Authorization = token;
   return config
 })
 

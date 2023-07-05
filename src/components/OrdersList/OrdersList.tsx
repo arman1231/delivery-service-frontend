@@ -8,7 +8,6 @@ import { TOrder } from "../../utils/api/types";
 
 export const OrdersList = () => {
   const orders = useSelector((state: any) => state.orders.orders);
-
   const dispatch: ThunkDispatch<any, any, AnyAction> = useDispatch();
 
   useEffect(() => {
@@ -16,12 +15,10 @@ export const OrdersList = () => {
   }, []);
 
   console.log(orders);
-  if (!orders) {
-    return <p>There are no orders...</p>;
-  }
+
   return (
     <div className={styles.orders}>
-      {orders?.map((order: TOrder) => {
+      {orders.length === 0 ? <p>There are no orders...</p> : orders?.map((order: TOrder) => {
         return <Order key={order.id} order={order} />;
       })}
     </div>

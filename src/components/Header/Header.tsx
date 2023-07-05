@@ -44,7 +44,7 @@ const Header = () => {
                     : styles.navItem
                 }
               >
-                <FaUserCircle className={styles.navItemIcon} /> {!!user ? user.name : 'Profile'}
+                <FaUserCircle className={styles.navItemIcon} /> {!!user ? user.principal.name : 'Profile'}
               </NavLink>
             </li>
             <li>
@@ -58,7 +58,6 @@ const Header = () => {
               >
                 <button className={styles.orderBtn}>Dashboard</button>
               </NavLink>
-              {/* <button className={styles.orderBtn}>Dashboard</button> */}
             </li>
             <li>
               <button onClick={handleButtonClick} className={styles.logoutBtn}>Logout</button>

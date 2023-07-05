@@ -29,6 +29,8 @@ export const fetchRegister = createAsyncThunk('auth/fetchRegister', async ({ nam
   export const fetchLogin = createAsyncThunk('auth/fetchLogin', async ({ email, password }: Omit<RegisterPayload, "name">) => {
     try {
       const { data } = await AuthService.login(email, password);
+      console.log(data.token);
+      
       localStorage.setItem('token', data.token)
       return data;
     } catch (error) {
