@@ -18,7 +18,32 @@ export const Order = ({ order }: IOrderProps) => {
   const [isTooltipOpen, setTooltipOpen] = React.useState(false);
   const dispatch: any = useDispatch();
 
+
+//   async function deleteOrder(id, token) {
+//     const url = `http://localhost:8082/order/${id}`;
+  
+//     try {
+//       const response = await fetch(url, {
+//         method: 'DELETE',
+//         headers: {
+//           Authorization: `Bearer ${token}`,
+//         },
+//       });
+  
+//       if (!response.ok) {
+//         throw new Error('Failed to delete order');
+//       }
+  
+//       const data = await response.json();
+//       return data;
+//     } catch (error) {
+//       console.log(error);
+//       throw error;
+//     }
+//   }
   const handleDeleteOrder = () => {
+    // const token = localStorage.getItem('token')
+    // deleteOrder(id, token)
     dispatch(deleteOrderById(id))
   };
   return (
