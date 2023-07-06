@@ -7,7 +7,7 @@ import { AiFillDelete } from "react-icons/ai";
 import { MdAssignmentInd } from "react-icons/md";
 import { IoCloseCircleOutline } from "react-icons/io5";
 import { useDispatch } from "react-redux";
-import { deleteOrderById } from "../../services/orders/slice";
+import { changeOrder, deleteOrderById } from "../../services/orders/slice";
 import { RxUpdate } from "react-icons/rx";
 interface IOrderProps {
   order: TOrder;
@@ -34,16 +34,28 @@ export const Order = ({ order }: IOrderProps) => {
   const handleCloseModifyOrder = () => {
     setIsModifyOrderOpen(!isModifyOrderOpen);
     setModifyOrderValue("");
-  }
+  };
 
   const handleModifyOrder = () => {
-console.log(modifyOrderValue);
-setModifyOrderValue("");
-  }
+    console.log(modifyOrderValue);
+    setModifyOrderValue("");
+    setIsModifyOrderOpen(false);
+    setTooltipOpen(false);
+    dispatch(changeOrder({
+        order: {
+          "city": "string",
+          "district": "string",
+          "receiverName": "string",
+          "receiverPhone": "string",
+          "receiverSurname": "string"
+        },
+        id: id
+      }));
+  };
 
   const handleOpenModifyOrder = () => {
     setIsModifyOrderOpen(!isModifyOrderOpen);
-  }
+  };
 
   React.useEffect(() => {
     if (isModifyOrderOpen && inputRef.current) {
@@ -51,9 +63,11 @@ setModifyOrderValue("");
     }
   }, [isModifyOrderOpen]);
 
-  const handleModifyOrderChange = (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+  const handleModifyOrderChange = (
+    event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
     const newValue = event.target.value;
-    setModifyOrderValue(newValue); 
+    setModifyOrderValue(newValue);
   };
   return (
     <div key={order.id} className={styles.order}>
@@ -81,12 +95,12 @@ setModifyOrderValue("");
                     minLength={3}
                     className={styles.modifyOrderInput}
                   />
-                  {
-                    modifyOrderValue.length > 0 &&   <RxUpdate
-                    onClick={handleModifyOrder}
-                    className={styles.orderModifyOrderContols}
-                  />
-                  }
+                  {modifyOrderValue.length > 0 && (
+                    <RxUpdate
+                      onClick={handleModifyOrder}
+                      className={styles.orderModifyOrderContols}
+                    />
+                  )}
                   <IoCloseCircleOutline
                     onClick={handleCloseModifyOrder}
                     className={styles.orderModifyOrderContols}

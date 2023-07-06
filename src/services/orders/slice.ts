@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import OrdersService from "../../utils/api/ordersApi";
-import { TOrder, PostOrderPayload } from "../../utils/api/types";
+import { TOrder, PostOrderPayload, OrderDestination } from "../../utils/api/types";
 
 interface IInitialState {
   orders: TOrder[];
@@ -37,14 +37,24 @@ export const postOrder = createAsyncThunk(
   }
 );
 
+export const changeOrder = createAsyncThunk(
+    "orders/changeOrder",
+    async ({ order, id }: { order: OrderDestination, id: number }) => {
+      try {
+        const { data } = await OrdersService.changeOrderDestination(id, order);
+        return data;
+      } catch (error) {
+        console.log(error);
+        throw error;
+      }
+    }
+  );
+
 export const deleteOrderById = createAsyncThunk(
   "orders/deleteOrderById",
   async (id: number) => {
-    const token = localStorage.getItem("token")
-    ? `Bearer ${localStorage.getItem("token")}`
-    : "";
     try {
-      const { data } = await OrdersService.deleteOrder(id, token);
+      const { data } = await OrdersService.deleteOrder(id);
       return data;
     } catch (error) {
       console.log(error);
@@ -65,6 +75,21 @@ const ordersSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
+    .addCase(changeOrder.pending, (state) => {
+        state.fetchOrders = "loading";
+      })
+      .addCase(changeOrder.fulfilled, (state, action) => {
+        state.fetchOrders = "succeeded";
+        // state.orders = state.orders.map((order) => {
+        //     if (order.id === action.payload)
+        // });
+        console.log(action);
+        
+      })
+      .addCase(changeOrder.rejected, (state, action) => {
+        state.fetchOrders = "failed";
+        state.error = action.error.message;
+      })
       .addCase(deleteOrderById.pending, (state) => {
         state.fetchOrders = "loading";
       })

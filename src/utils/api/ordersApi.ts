@@ -1,5 +1,5 @@
 import { orders_api } from "./apiConfig";
-import { PostOrderPayload } from "./types";
+import { OrderDestination, PostOrderPayload } from "./types";
 
 export default class OrdersService {
     static async getOrders(token: string) {
@@ -18,8 +18,22 @@ export default class OrdersService {
     });
   }
 
-  static async deleteOrder(id: number, token: string) {
+  static async deleteOrder(id: number) {
+    const token = localStorage.getItem("token")
+    ? `Bearer ${localStorage.getItem("token")}`
+    : "";
     return orders_api.delete(`/${id}`, {
+        headers: {
+            Authorization: token,
+          },
+    });
+  }
+
+  static async changeOrderDestination(id: number, order: OrderDestination) {
+    const token = localStorage.getItem("token")
+    ? `Bearer ${localStorage.getItem("token")}`
+    : "";
+    return orders_api.put(`/${id}`, order, {
         headers: {
             Authorization: token,
           },
