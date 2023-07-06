@@ -8,13 +8,14 @@ import { MdAssignmentInd } from "react-icons/md";
 import { IoCloseCircleOutline } from "react-icons/io5";
 import { useDispatch } from "react-redux";
 import { deleteOrderById } from "../../services/orders/slice";
-
+import { RxUpdate } from "react-icons/rx";
 interface IOrderProps {
   order: TOrder;
 }
 
 export const Order = ({ order }: IOrderProps) => {
   const { destination, id, status, parcels } = order;
+  const [modifyOrderValue, setModifyOrderValue] = React.useState("");
   const [isTooltipOpen, setTooltipOpen] = React.useState(false);
   const [isModifyOrderOpen, setIsModifyOrderOpen] = React.useState(false);
   const dispatch: any = useDispatch();
@@ -25,8 +26,19 @@ export const Order = ({ order }: IOrderProps) => {
 
   const handleCloseTooltip = () => {
     setTooltipOpen(false);
-    setIsModifyOrderOpen(false)
-  }
+    setIsModifyOrderOpen(false);
+    setModifyOrderValue("")
+  };
+
+  const handleModifyOrderChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
+    const { value } = e.target;
+
+    setModifyOrderValue(value)
+console.log(modifyOrderValue);
+
+  };
   return (
     <div key={order.id} className={styles.order}>
       <h3 className={styles.orderTitle}>Order #{id}</h3>
@@ -44,7 +56,14 @@ export const Order = ({ order }: IOrderProps) => {
             {isModifyOrderOpen ? (
               <li className={styles.orderTooltipMenuItem}>
                 <div className={styles.modifyOrderInputContainer}>
-                  <input type="text" className={styles.modifyOrderInput} />
+                  <input
+                    type="text"
+                    name="destination"
+                    onChange={handleModifyOrderChange}
+                    value={modifyOrderValue}
+                    minLength={3}
+                    className={styles.modifyOrderInput}
+                  />
                   <IoCloseCircleOutline
                     onClick={() => setIsModifyOrderOpen(!isModifyOrderOpen)}
                     className={styles.orderModifyOrderContols}
