@@ -40,7 +40,6 @@ export const postOrder = createAsyncThunk(
 export const deleteOrderById = createAsyncThunk(
   "orders/deleteOrderById",
   async (id: number) => {
-    console.log(id);
     const token = localStorage.getItem("token")
     ? `Bearer ${localStorage.getItem("token")}`
     : "";
@@ -71,9 +70,7 @@ const ordersSlice = createSlice({
       })
       .addCase(deleteOrderById.fulfilled, (state, action) => {
         state.fetchOrders = "succeeded";
-        state.orders = state.orders.filter(
-          (order) => order.id !== action.payload
-        );
+        state.orders = state.orders.filter((order) => order.id !== action.meta.arg);
       })
       .addCase(deleteOrderById.rejected, (state, action) => {
         state.fetchOrders = "failed";
