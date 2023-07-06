@@ -16,7 +16,7 @@ interface IOrderProps {
 export const Order = ({ order }: IOrderProps) => {
   const { destination, id, status, parcels } = order;
   const [isTooltipOpen, setTooltipOpen] = React.useState(false);
-  const [isModifyOrderOpen, setIsModifyOrderOpen] = React.useState(true);
+  const [isModifyOrderOpen, setIsModifyOrderOpen] = React.useState(false);
   const dispatch: any = useDispatch();
 
   const handleDeleteOrder = () => {
