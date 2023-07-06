@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import styles from "./Order.module.css";
 import { TParsel, TOrder } from "../../utils/api/types";
 import { SlOptionsVertical } from "react-icons/sl";
@@ -15,6 +15,7 @@ interface IOrderProps {
 
 export const Order = ({ order }: IOrderProps) => {
   const { destination, id, status, parcels } = order;
+  const inputRef = useRef<HTMLInputElement>(null);
   const [modifyOrderValue, setModifyOrderValue] = React.useState("");
   const [isTooltipOpen, setTooltipOpen] = React.useState(false);
   const [isModifyOrderOpen, setIsModifyOrderOpen] = React.useState(false);
@@ -27,17 +28,32 @@ export const Order = ({ order }: IOrderProps) => {
   const handleCloseTooltip = () => {
     setTooltipOpen(false);
     setIsModifyOrderOpen(false);
-    setModifyOrderValue("")
+    setModifyOrderValue("");
   };
 
-  const handleModifyOrderChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
-  ) => {
-    const { value } = e.target;
+  const handleCloseModifyOrder = () => {
+    setIsModifyOrderOpen(!isModifyOrderOpen);
+    setModifyOrderValue("");
+  }
 
-    setModifyOrderValue(value)
+  const handleModifyOrder = () => {
 console.log(modifyOrderValue);
+setModifyOrderValue("");
+  }
 
+  const handleOpenModifyOrder = () => {
+    setIsModifyOrderOpen(!isModifyOrderOpen);
+  }
+
+  React.useEffect(() => {
+    if (isModifyOrderOpen && inputRef.current) {
+      inputRef.current.focus();
+    }
+  }, [isModifyOrderOpen]);
+
+  const handleModifyOrderChange = (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+    const newValue = event.target.value;
+    setModifyOrderValue(newValue); 
   };
   return (
     <div key={order.id} className={styles.order}>
@@ -58,14 +74,21 @@ console.log(modifyOrderValue);
                 <div className={styles.modifyOrderInputContainer}>
                   <input
                     type="text"
+                    ref={inputRef}
                     name="destination"
                     onChange={handleModifyOrderChange}
                     value={modifyOrderValue}
                     minLength={3}
                     className={styles.modifyOrderInput}
                   />
+                  {
+                    modifyOrderValue.length > 0 &&   <RxUpdate
+                    onClick={handleModifyOrder}
+                    className={styles.orderModifyOrderContols}
+                  />
+                  }
                   <IoCloseCircleOutline
-                    onClick={() => setIsModifyOrderOpen(!isModifyOrderOpen)}
+                    onClick={handleCloseModifyOrder}
                     className={styles.orderModifyOrderContols}
                   />
                 </div>
@@ -73,7 +96,7 @@ console.log(modifyOrderValue);
             ) : (
               <li
                 className={styles.orderTooltipMenuItem}
-                onClick={() => setIsModifyOrderOpen(!isModifyOrderOpen)}
+                onClick={handleOpenModifyOrder}
               >
                 <CiEdit className={styles.menuItemIcon} />
                 Modify Destination
