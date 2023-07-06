@@ -80,9 +80,15 @@ const ordersSlice = createSlice({
       })
       .addCase(changeOrder.fulfilled, (state, action) => {
         state.fetchOrders = "succeeded";
-        // state.orders = state.orders.map((order) => {
-        //     if (order.id === action.payload)
-        // });
+        state.orders = state.orders.map((order) => {
+            if (order.id === action.payload.id) {
+              return {
+                ...order,
+                destination: action.payload.destination,
+              };
+            }
+            return order;
+          });
         console.log(action);
         
       })
