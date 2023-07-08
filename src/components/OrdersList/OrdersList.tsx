@@ -6,7 +6,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchOrders } from "../../services/orders/slice";
 import { TOrder } from "../../utils/api/types";
 
-export const OrdersList = () => {
+interface IOrdersListProps {
+  handleOpenModifyOrderModal: (id: any) => void
+}
+
+export const OrdersList = ({ handleOpenModifyOrderModal}: IOrdersListProps) => {
   const orders = useSelector((state: any) => state.orders.orders);
   const dispatch: ThunkDispatch<any, any, AnyAction> = useDispatch();
 
@@ -19,7 +23,7 @@ export const OrdersList = () => {
   return (
     <div className={styles.orders}>
       {orders.length === 0 ? <p>There are no orders...</p> : orders?.map((order: TOrder) => {
-        return <Order key={order.id} order={order} />;
+        return <Order key={order.id} order={order} handleOpenModifyOrderModal={() => handleOpenModifyOrderModal(order.id)} />;
       })}
     </div>
   );

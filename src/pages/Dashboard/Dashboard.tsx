@@ -5,15 +5,19 @@ import { OrderControls } from "../../components/OrderControls/OrderControls";
 import { Modal } from "../../components/Modal/Modal";
 import { AddOrderForm } from "../../components/AddOrderForm/AddOrderForm";
 import { OrdersList } from "../../components/OrdersList/OrdersList";
+import { ModifyOrderForm } from "../../components/ModifyOrderForm/ModifyOrderForm";
 
 const Dashboard = () => {
   const [isModalOpen, setIsModalOpen] = useState({
     addOrderModal: false,
-    sortByModal: false
+    sortByModal: false,
+    modifyOrderModal: false,
   });
 
+  const [modifyOrderId, setModifyOrderId] = useState();
+
   const handleCloseModal = () => {
-    setIsModalOpen({ ...isModalOpen, addOrderModal: false, sortByModal: false })
+    setIsModalOpen({ ...isModalOpen, addOrderModal: false, sortByModal: false, modifyOrderModal: false })
   }
 
   const handleOpenAddOrderModal = () => {
@@ -22,6 +26,11 @@ const Dashboard = () => {
 
   const handleOpenSortByModal = () => {
     setIsModalOpen({ ...isModalOpen, sortByModal: !isModalOpen.sortByModal })
+  }
+
+  const handleOpenModifyOrderModal = (id: any) => {    
+    setModifyOrderId(id)
+    setIsModalOpen({ ...isModalOpen, modifyOrderModal: !isModalOpen.modifyOrderModal })
   }
 
   const options = [
@@ -34,10 +43,15 @@ const Dashboard = () => {
     <section className={styles.dashboard}>
       <PageTitle>Dashboard</PageTitle>
       <OrderControls handleOpenAddOrderModal={handleOpenAddOrderModal} handleOpenSortByModal={handleOpenSortByModal} />
-      <OrdersList />
+      <OrdersList handleOpenModifyOrderModal={(id) => handleOpenModifyOrderModal(id)} />
       {!!isModalOpen.addOrderModal && (
         <Modal handleCloseModal={handleCloseModal}>
           <AddOrderForm handleCloseModal={handleCloseModal} />
+        </Modal>
+      )}
+        {!!isModalOpen.modifyOrderModal && (
+        <Modal handleCloseModal={handleCloseModal}>
+          <ModifyOrderForm handleCloseModal={handleCloseModal} id={modifyOrderId} />
         </Modal>
       )}
       {!!isModalOpen.sortByModal && (

@@ -11,9 +11,10 @@ import { changeOrder, deleteOrderById } from "../../services/orders/slice";
 import { RxUpdate } from "react-icons/rx";
 interface IOrderProps {
   order: TOrder;
+  handleOpenModifyOrderModal: (id: any) => void;
 }
 
-export const Order = ({ order }: IOrderProps) => {
+export const Order = ({ order, handleOpenModifyOrderModal }: IOrderProps) => {
   const { destination, id, status, parcels } = order;
   const inputRef = useRef<HTMLInputElement>(null);
   const [modifyOrderValue, setModifyOrderValue] = React.useState("");
@@ -37,24 +38,26 @@ export const Order = ({ order }: IOrderProps) => {
   };
 
   const handleModifyOrder = () => {
-    console.log(modifyOrderValue);
-    setModifyOrderValue("");
-    setIsModifyOrderOpen(false);
-    setTooltipOpen(false);
-    dispatch(changeOrder({
-        order: {
-          "city": "string",
-          "district": "string",
-          "receiverName": "string",
-          "receiverPhone": "string",
-          "receiverSurname": "string"
-        },
-        id: id
-      }));
+    handleOpenModifyOrderModal(id)
+    // console.log(modifyOrderValue);
+    // setModifyOrderValue("");
+    // setIsModifyOrderOpen(false);
+    // setTooltipOpen(false);
+    // dispatch(changeOrder({
+    //     order: {
+    //       "city": "string",
+    //       "district": "string",
+    //       "receiverName": "string",
+    //       "receiverPhone": "string",
+    //       "receiverSurname": "string"
+    //     },
+    //     id: id
+    //   }));
   };
 
   const handleOpenModifyOrder = () => {
-    setIsModifyOrderOpen(!isModifyOrderOpen);
+    handleOpenModifyOrderModal(id)
+    // setIsModifyOrderOpen(!isModifyOrderOpen);
   };
 
   React.useEffect(() => {

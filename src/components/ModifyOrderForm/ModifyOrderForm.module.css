@@ -1,0 +1,71 @@
+.addOrderFormCaption {
+    text-align: center;
+    padding-bottom: 0;
+    margin-bottom: 0;
+}
+
+.form {
+    padding: 0 25px 25px 25px;
+}
+
+.fieldset {
+    display: flex;
+    gap: 5px;
+    flex-direction: column;
+    border: none;
+    margin: 0;
+    padding: 0;
+}
+.fieldsetCaption {
+    padding-bottom: 0;
+    margin-bottom: 5px;
+}
+
+.fieldsetCaption::first-letter {
+    color: #EF5A2B;
+    padding-bottom: 0;
+    margin-bottom: 0;
+}
+
+.submitButton {
+    background-color: #EF5A2B;
+    color: white;
+    border: none;
+    outline: none;
+    padding: 10px 25px;
+    margin-top: 25px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.submitButton:hover {
+    background-color: #9e2905;
+}
+
+.buttonWrapper {
+    text-align: center;
+}
+
+.parsel {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    flex-direction: row;
+    border: 1px white dashed;
+    padding: 5px;
+}
+
+.addParsel {
+    background-color: rgb(127, 156, 83);
+    margin-right: 20px;
+}
+
+.removeParcelIcon {
+    cursor: pointer;
+    fill: #EF5A2B;
+}
+
+.removeParcelIcon:hover {
+    fill: white;
+}
+
