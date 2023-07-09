@@ -16,10 +16,7 @@ interface IOrderProps {
 
 export const Order = ({ order, handleOpenModifyOrderModal }: IOrderProps) => {
   const { destination, id, status, parcels } = order;
-  const inputRef = useRef<HTMLInputElement>(null);
-  const [modifyOrderValue, setModifyOrderValue] = React.useState("");
   const [isTooltipOpen, setTooltipOpen] = React.useState(false);
-  const [isModifyOrderOpen, setIsModifyOrderOpen] = React.useState(false);
   const dispatch: any = useDispatch();
 
   const handleDeleteOrder = () => {
@@ -28,41 +25,17 @@ export const Order = ({ order, handleOpenModifyOrderModal }: IOrderProps) => {
 
   const handleCloseTooltip = () => {
     setTooltipOpen(false);
-    setIsModifyOrderOpen(false);
-    setModifyOrderValue("");
-  };
-
-  const handleCloseModifyOrder = () => {
-    setIsModifyOrderOpen(!isModifyOrderOpen);
-    setModifyOrderValue("");
-  };
-
-  const handleModifyOrder = () => {
-    handleOpenModifyOrderModal(id);
-    setTooltipOpen(false);
   };
 
   const handleOpenModifyOrder = () => {
     handleOpenModifyOrderModal(id)
-    // setIsModifyOrderOpen(!isModifyOrderOpen);
   };
-
-  React.useEffect(() => {
-    if (isModifyOrderOpen && inputRef.current) {
-      inputRef.current.focus();
-    }
-  }, [isModifyOrderOpen]);
 
   useEffect(() => {
     setTooltipOpen(false);
   }, [order])
 
-  const handleModifyOrderChange = (
-    event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
-  ) => {
-    const newValue = event.target.value;
-    setModifyOrderValue(newValue);
-  };
+
   return (
     <div key={order.id} className={styles.order}>
       <h3 className={styles.orderTitle}>Order #{id}</h3>
@@ -77,40 +50,14 @@ export const Order = ({ order, handleOpenModifyOrderModal }: IOrderProps) => {
             onClick={handleCloseTooltip}
           />
           <ul className={styles.orderTooltipMenu}>
-            {isModifyOrderOpen ? (
-              <li className={styles.orderTooltipMenuItem}>
-                <div className={styles.modifyOrderInputContainer}>
-                  <input
-                    type="text"
-                    ref={inputRef}
-                    name="destination"
-                    onChange={handleModifyOrderChange}
-                    value={modifyOrderValue}
-                    minLength={3}
-                    className={styles.modifyOrderInput}
-                  />
-                  {modifyOrderValue.length > 0 && (
-                    <RxUpdate
-                      onClick={handleModifyOrder}
-                      className={styles.orderModifyOrderContols}
-                    />
-                  )}
-                  <IoCloseCircleOutline
-                    onClick={handleCloseModifyOrder}
-                    className={styles.orderModifyOrderContols}
-                  />
-                </div>
-              </li>
-            ) : (
-              <li
-                className={styles.orderTooltipMenuItem}
-                onClick={handleOpenModifyOrder}
-              >
-                <CiEdit className={styles.menuItemIcon} />
-                Modify Destination
-              </li>
-            )}
 
+            <li
+              className={styles.orderTooltipMenuItem}
+              onClick={handleOpenModifyOrder}
+            >
+              <CiEdit className={styles.menuItemIcon} />
+              Modify Destination
+            </li>
             <li
               className={styles.orderTooltipMenuItem}
               onClick={handleDeleteOrder}
@@ -131,9 +78,9 @@ export const Order = ({ order, handleOpenModifyOrderModal }: IOrderProps) => {
             <span className={styles.orderDestinationItemCaption}>
               {key.includes("receiver")
                 ? key
-                    .replace("receiver", "Receiver")
-                    .split(/(?=[A-Z])/)
-                    .join(" ")
+                  .replace("receiver", "Receiver")
+                  .split(/(?=[A-Z])/)
+                  .join(" ")
                 : key.charAt(0).toUpperCase() + key.slice(1)}
               :{" "}
             </span>
@@ -152,9 +99,9 @@ export const Order = ({ order, handleOpenModifyOrderModal }: IOrderProps) => {
                 <span className={styles.orderDestinationItemCaption}>
                   {key.includes("receiver")
                     ? key
-                        .replace("receiver", "Receiver")
-                        .split(/(?=[A-Z])/)
-                        .join(" ")
+                      .replace("receiver", "Receiver")
+                      .split(/(?=[A-Z])/)
+                      .join(" ")
                     : key.charAt(0).toUpperCase() + key.slice(1)}
                   :{" "}
                 </span>
@@ -170,9 +117,8 @@ export const Order = ({ order, handleOpenModifyOrderModal }: IOrderProps) => {
         {" "}
         <h4 className={styles.orderStatus}>Status: {status}</h4>
         <div
-          className={`${styles.dot} ${
-            status === "CREATED" ? styles.red : styles.green
-          }`}
+          className={`${styles.dot} ${status === "CREATED" ? styles.red : styles.green
+            }`}
         />
       </div>
     </div>
