@@ -12,6 +12,7 @@
     color: #F8F8F8;
     font-size: 30px;
     margin-right: 10px;
+    animation: rotate 6s linear infinite;
 }
 
 .orangeText {
@@ -85,3 +86,13 @@
     border-top: #F8F8F8 1px dashed;
     border-bottom: #F8F8F8 1px dashed;
 }
+
+@keyframes rotate {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+  

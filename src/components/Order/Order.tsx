@@ -44,7 +44,7 @@ export const Order = ({ order, handleOpenModifyOrderModal }: IOrderProps) => {
         onClick={() => setTooltipOpen(true)}
       />
       {isTooltipOpen && (
-        <div className={styles.orderTooltip}>
+        <div className={`${styles.orderTooltip} ${styles.open}`}>
           <IoCloseCircleOutline
             className={styles.closeIcon}
             onClick={handleCloseTooltip}

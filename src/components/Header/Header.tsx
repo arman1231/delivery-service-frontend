@@ -25,7 +25,7 @@ const Header = () => {
     <header className={styles.header}>
       <article className={styles.logo}>
         <NavLink to="/" className={styles.logoLink}>
-          <GiPolarStar className={styles.logoIcon} />
+          <GiPolarStar className={`${styles.logoIcon} ${styles.rotateIcon}`} />
           <span className={styles.orangeText}>D</span>
           <span>elivery</span>
           <span className={styles.orangeText}>S</span>
