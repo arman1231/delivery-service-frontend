@@ -3,7 +3,7 @@ import styles from "./ModifyOrderForm.module.css";
 import { ParselTypes, TOrder } from "../../utils/api/types";
 import { useDispatch, useSelector } from "react-redux";
 import { AnyAction, ThunkDispatch } from "@reduxjs/toolkit";
-import { postOrder } from "../../services/orders/slice";
+import { changeOrder, postOrder } from "../../services/orders/slice";
 import { SlMinus } from 'react-icons/sl';
 
 interface IAddOrderFormProps {
@@ -57,40 +57,50 @@ export const ModifyOrderForm = ({ handleCloseModal, id }: IAddOrderFormProps) =>
       receiverName: "",
       receiverPhone: "",
       receiverSurname: "",
-      parsels: [{ type: "", weight: 0 }],
+      parsels: [{ type: ParselTypes.UNSELECTED, weight: 0 }],
     });
     handleCloseModal();
     console.log(state);
-    dispatch(
-      postOrder({
-        destination: {
+    dispatch(changeOrder({
+        order: {
           city: state.city,
           district: state.district,
           receiverName: state.receiverName,
           receiverPhone: state.receiverPhone,
           receiverSurname: state.receiverSurname,
         },
-        parcels: state.parsels.map((parcel) => ({
-          ...parcel,
-          weight: Number(parcel.weight),
-        })),
-      })
-    );
+        id: id
+      }));
+    // dispatch(
+    //   postOrder({
+    //     destination: {
+    //       city: state.city,
+    //       district: state.district,
+    //       receiverName: state.receiverName,
+    //       receiverPhone: state.receiverPhone,
+    //       receiverSurname: state.receiverSurname,
+    //     },
+    //     parcels: state.parsels.map((parcel) => ({
+    //       ...parcel,
+    //       weight: Number(parcel.weight),
+    //     })),
+    //   })
+    // );
   };
 
-  const handleAddParsel = () => {
-    setState((prevState) => ({
-      ...prevState,
-      parsels: [...prevState.parsels, { type: "", weight: 0 }],
-    }));
-  };
+//   const handleAddParsel = () => {
+//     setState((prevState) => ({
+//       ...prevState,
+//       parsels: [...prevState.parsels, { type: "", weight: 0 }],
+//     }));
+//   };
 
-  const handleRemoveParcel = (i: number) => {
-    setState((prevState) => ({
-      ...prevState,
-      parsels: prevState.parsels.filter((parsel, id) => id !== i)
-    }))
-  }
+//   const handleRemoveParcel = (i: number) => {
+//     setState((prevState) => ({
+//       ...prevState,
+//       parsels: prevState.parsels.filter((parsel, id) => id !== i)
+//     }))
+//   }
   console.log(state);
 
   return (
@@ -178,7 +188,7 @@ export const ModifyOrderForm = ({ handleCloseModal, id }: IAddOrderFormProps) =>
                 disabled
                 required
               />
-              {i !== 0 && <SlMinus className={styles.removeParcelIcon} onClick={() => handleRemoveParcel(i)} />}
+              {/* {i !== 0 && <SlMinus className={styles.removeParcelIcon} onClick={() => handleRemoveParcel(i)} />} */}
             </div>
           ))}
         </fieldset>

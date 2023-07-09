@@ -16,15 +16,16 @@ export enum ParselTypes {
         EXTRA_LARGE = 'EXTRA_LARGE',
         LARGE = 'LARGE',
         MEDIUM = 'MEDIUM',
-        SMALL = 'SMALL'
+        SMALL = 'SMALL',
+        UNSELECTED = '',
 }
 
 export type TParsel = {
-        id: number;
+        id?: number;
         type: ParselTypes;
         weight: number;
-        [key: string]: string | number;
-}
+        [key: string]: string | number | undefined;
+      }
 
 export type ParselPayload = Omit<TParsel, 'id'>
 

@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import styles from "./Order.module.css";
 import { TParsel, TOrder } from "../../utils/api/types";
 import { SlOptionsVertical } from "react-icons/sl";
@@ -38,21 +38,8 @@ export const Order = ({ order, handleOpenModifyOrderModal }: IOrderProps) => {
   };
 
   const handleModifyOrder = () => {
-    handleOpenModifyOrderModal(id)
-    // console.log(modifyOrderValue);
-    // setModifyOrderValue("");
-    // setIsModifyOrderOpen(false);
-    // setTooltipOpen(false);
-    // dispatch(changeOrder({
-    //     order: {
-    //       "city": "string",
-    //       "district": "string",
-    //       "receiverName": "string",
-    //       "receiverPhone": "string",
-    //       "receiverSurname": "string"
-    //     },
-    //     id: id
-    //   }));
+    handleOpenModifyOrderModal(id);
+    setTooltipOpen(false);
   };
 
   const handleOpenModifyOrder = () => {
@@ -65,6 +52,10 @@ export const Order = ({ order, handleOpenModifyOrderModal }: IOrderProps) => {
       inputRef.current.focus();
     }
   }, [isModifyOrderOpen]);
+
+  useEffect(() => {
+    setTooltipOpen(false);
+  }, [order])
 
   const handleModifyOrderChange = (
     event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
