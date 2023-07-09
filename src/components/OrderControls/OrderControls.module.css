@@ -15,10 +15,11 @@
     outline: none;
     border: 1px #EF5A2B solid;
     cursor: pointer;
+    transition: background-color 0.5s ease;
 }
 
 .control:hover {
-    background: rgba(230, 80, 29, 0.1);
+    background-color: rgba(230, 80, 29, 0.1);
 }
 
 .control svg {

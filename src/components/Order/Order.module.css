@@ -26,18 +26,18 @@
 
 .red {
   background-color: red;
-  box-shadow: 0 0 3px rgba(255, 0, 0, 0.5), 0 0 6px rgba(255, 0, 0, 0.5),
-    0 0 9px rgba(255, 0, 0, 0.5), 0 0 12px rgba(255, 0, 0, 0.5),
-    0 0 21px rgba(255, 0, 0, 0.5), 0 0 24px rgba(255, 0, 0, 0.5),
-    0 0 30px rgba(255, 0, 0, 0.5), 0 0 45px rgba(255, 0, 0, 0.5);
+  box-shadow: 0 0 1px rgba(255, 0, 0, 0.5), 0 0 3px rgba(255, 0, 0, 0.5),
+    0 0 3px rgba(255, 0, 0, 0.5), 0 0 6px rgba(255, 0, 0, 0.5),
+    0 0 7px rgba(255, 0, 0, 0.5), 0 0 12px rgba(255, 0, 0, 0.5),
+    0 0 10px rgba(255, 0, 0, 0.5), 0 0 23px rgba(255, 0, 0, 0.5);
 }
 
 .green {
   background-color: green;
-  box-shadow: 0 0 3px rgba(0, 255, 0, 0.5), 0 0 6px rgba(0, 255, 0, 0.5),
-    0 0 9px rgba(0, 255, 0, 0.5), 0 0 12px rgba(0, 255, 0, 0.5),
-    0 0 21px rgba(0, 255, 0, 0.5), 0 0 24px rgba(0, 255, 0, 0.5),
-    0 0 30px rgba(0, 255, 0, 0.5), 0 0 45px rgba(0, 255, 0, 0.5);
+  box-shadow: 0 0 1px rgba(0, 255, 0, 0.5), 0 0 3px rgba(0, 255, 0, 0.5),
+    0 0 3px rgba(0, 255, 0, 0.5), 0 0 6px rgba(0, 255, 0, 0.5),
+    0 0 7px rgba(0, 255, 0, 0.5), 0 0 12px rgba(0, 255, 0, 0.5),
+    0 0 10px rgba(0, 255, 0, 0.5), 0 0 23px rgba(0, 255, 0, 0.5);
 }
 
 .orderDestinationItemCaption {
@@ -53,6 +53,11 @@
   width: 25px;
   height: 25px;
   cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.orderTooltipContols:hover {
+  transform: rotate(90deg);
 }
 
 .modifyOrderInputContainer {
@@ -120,6 +125,8 @@
   gap: 10px;
   align-items: center;
   cursor: pointer;
+  background-color: transparent;
+  transition: all .3s ease;
 }
 
 .orderTooltipMenuItem:hover {
@@ -138,6 +145,10 @@
   height: 25px;
   position: absolute;
   right: 5%;
-  /* margin: 0 auto;
-    padding-bottom: inherit; */
+  background-color: transparent;
+  transition: transform 0.2s ease-in-out;
+}
+
+.closeIcon:hover {
+  transform: rotate(90deg);
 }
